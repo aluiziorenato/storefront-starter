@@ -1,33 +1,20 @@
-# Storefront
+## Deploy Storefront to Firebase
 
-:shopping: :rocket:
-[PWA](https://developers.google.com/web/progressive-web-apps) and
-[JAMstack](https://jamstack.org/)
-based e-commerce template for
-[E-Com Plus](https://www.e-com.plus)
-stores
+Pre-rendered views and assets to [Firebase Hosting](https://firebase.google.com/docs/hosting?hl=pt-br), non-pre-rendered views SSRed with [Cloud Functions](https://firebase.google.com/docs/functions) and cached (acting like ISG).
 
-> Gerenated from [@ecomplus/storefront-starter](https://github.com/ecomplus/storefront-starter)
+### Getting started
 
-:scroll: **[Get started](https://github.com/ecomplus/storefront-starter#getting-started)**
-/ [Documentation](https://developers.e-com.plus/storefront/)
+1. [Create a service account](https://console.cloud.google.com/iam-admin/serviceaccounts) for your Firebase project directly on Google Cloud Platform;
+2. Generate and download a JSON key for the created account;
+3. Add a _secret_ to your GitHub repository with name `GCP_ACCOUNT_KEY` and paste the key JSON;
 
-## Project setup
+#### Prepare CI files
 
-```
-npm i
-```
+4. Copy new build and deploy GitHub Actions workflow from `.github/workflows/.firebase/build-and-deploy.yml` to `.github/workflows/build-and-deploy.yml`;
 
-### Compiles and hot-reloads for development
-
-```
-npm run serve
-```
-
-It starts serving site on http://localhost:9100/.
-
-### Compiles and minifies for production
-
-```
-npm run build
+```bash
+mv ./.github/workflows/.firebase/build-and-deploy.yml ./.github/workflows/build-and-deploy.yml
+echo "true" > ./.github/firebase-deploy
+git add ./.github
+git commit -m "ci(build-and-deploy): deploy to firebase"
 ```
